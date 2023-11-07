@@ -5,35 +5,37 @@ module.exports = {
     jest: true,
   },
   extends: [
+    "eslint:recommended",
     "airbnb-base",
+    "airbnb-typescript/base",
+    "plugin:@typescript-eslint/recommended",
+  ],
+  overrides: [
+    {
+      env: {
+        node: true,
+      },
+      files: [
+        ".eslintrc.{js,cjs}",
+      ],
+      parserOptions: {
+        sourceType: "script",
+      },
+    },
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 12,
+    ecmaVersion: "latest",
     sourceType: "module",
+    project: "./tsconfig.json",
   },
   plugins: [
     "@typescript-eslint",
   ],
-  settings: {
-    "import/resolver": {
-      typescript: {
-        project: ".",
-      },
-    },
-  },
   rules: {
-    "import/extensions": "off",
-    quotes: ["error", "double"],
-    "no-restricted-syntax": ["off", "ForOfStatement"],
-    "no-shadow": "off",
-    "@typescript-eslint/no-shadow": "error",
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "error",
-    "no-use-before-define": ["error", "nofunc"],
-    "import/prefer-default-export": "off",
-    "no-mixed-operators": "off",
-    "@typescript-eslint/explicit-function-return-type": ["error"],
-    indent: ["error", 2],
+    "@typescript-eslint/comma-dangle": ["error", "always-multiline"],
+    "@typescript-eslint/no-use-before-define": ["error", { functions: false }],
+    "@typescript-eslint/quotes": ["error", "double", { avoidEscape: true, allowTemplateLiterals: false }],
+    "max-len": "off",
   },
 };
